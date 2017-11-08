@@ -1,0 +1,17 @@
+// BASE COMPONENT
+// ==========================
+.icon{
+  vertical-align: middle;
+}
+.container{
+  position: relative;
+  max-width: $screen-max;
+  height: 100%;
+  margin: 0 auto;
+  //background-color: $bgBody;
+}
+.page{
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}

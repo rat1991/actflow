@@ -1,0 +1,55 @@
+// 在移动设备上生成 1px 宽的边框
+// @name borderOnePix
+// --------------------------------
+@mixin borderOnePixStyle($direction: all, $color:$colorBorder){
+  border-style: solid;
+  border-color: $color; 
+  @if $direction == all {
+    border-width: 1px;
+  }
+  @else if $direction == top {
+    border-width: 1px 0 0 0;
+  }
+  @else if $direction == bottom {
+    border-width: 0 0 1px 0;
+  }
+  @else if $direction == left {
+    border-width: 0 0 0 1px;
+  }
+  @else if $direction == right {
+    border-width: 0 1px 0 0;
+  }
+  @else if $direction == horizontal {
+    border-width: 0 1px;
+  }
+  @else if $direction == vertical {
+    border-width: 1px 0;
+  }
+  @else if $direction == arrow {
+    border-width: 1px 1px 0 0;
+  }
+}
+@mixin borderOnePix($direction: all, $color:$colorBorder, $radius: 0, $position: inside) {
+  @include borderOnePixStyle($direction, $color);
+  border-radius: $radius;
+  @include screenResolution(2){
+    position: relative;
+    border: none;
+    &:after {
+      content:"";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border-radius: $radius * 2;
+      @include borderOnePixStyle($direction, $color);
+      transform-origin: 0 0;
+      transform: scale(.5);
+      @if $position == inside {
+        box-sizing: border-box;
+      }
+      pointer-events: none;
+    }
+  }
+}

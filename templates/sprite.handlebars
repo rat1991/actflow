@@ -1,0 +1,11 @@
+{{#sprites}}
+.sprite-{{name}} {
+  display: block;
+  width: torem({{px.width}});
+  height: torem({{px.height}});
+  background-image: url(#{$pathSprite}/{{{escaped_image}}});
+  background-size: torem({{px.total_width}})  torem({{px.total_height}});
+  background-repeat:no-repeat;
+  background-position: torem({{px.offset_x}}) torem({{px.offset_y}});
+}
+{{/sprites}}

@@ -1,0 +1,364 @@
+/*==============================
+reuse.css重用
+================================*/
+
+/*---------------------------------
+space
+---------------------------------*/
+//margin & padding[5,10,15,20,25,30]
+@for $i from 1 through 6 {
+  $gap-var: 5 * $i;
+  //margin
+  .mt-#{$gap-var} {margin-top:    $gap-var + px !important;}
+  .mr-#{$gap-var} {margin-right:  $gap-var + px !important;}
+  .mb-#{$gap-var} {margin-bottom: $gap-var + px !important;}
+  .ml-#{$gap-var} {margin-left:   $gap-var + px !important;}
+  //padding
+  .pt-#{$gap-var} {padding-top:    $gap-var + px !important;}
+  .pr-#{$gap-var} {padding-right:  $gap-var + px !important;}
+  .pb-#{$gap-var} {padding-bottom: $gap-var + px !important;}
+  .pl-#{$gap-var} {padding-left:   $gap-var + px !important;}
+}
+//页面间距
+.gap-sides{
+  padding: 0 $gapSides;
+}
+.gap-layer{
+  padding: $gap-10 0;
+}
+//border
+.bt {@extend %borderTop;}
+.br {@extend %borderRight;}
+.bb {@extend %borderBottom;}
+.bl {@extend %borderLeft;}
+//active
+.active:active{background-color: $bgActive !important;}
+//remove margin
+.m-n{margin: 0;}
+.mt-n {margin-top:    0px!important;}
+.mb-n {margin-bottom: 0px!important;}
+.ml-n {margin-left:   0px!important;}
+.mr-n {margin-right:  0px!important;}
+//remove padding
+.p-n{padding: 0!important;}
+.pt-n {padding-top:    0px!important;}
+.pb-n {padding-bottom: 0px!important;}
+.pl-n {padding-left:   0px!important;}
+.pr-n {padding-right:  0px!important;}
+//remove border
+.b-n,.b-n:after{border-color: transparent !important;}
+.bt-n,.bt-n:after{border-top-color: transparent !important;}
+.br-n,.br-n:after{border-right-color: transparent !important;}
+.bb-n,.bb-n:after{border-bottom-color: transparent !important;}
+.bl-n,.bl-n:after{border-left-color: transparent !important;}
+//remove radius
+.r-n,.r-n:after{border-radius: 0;}
+//remove active background
+.active-n:active{background-color: transparent !important;}
+
+/*---------------------------------
+background
+---------------------------------*/
+.bg-white{
+  background-color: $white !important;
+}
+.bg-default{
+  background-color: $bgBody !important;
+}
+.bg-transparent{
+  background-color: transparent !important;
+}
+.bg-disable{
+  background-color: $grayLight !important;
+}
+.bg-success{
+  background-color: $success !important;
+}
+.bg-primary{
+  background-color: $primary !important;
+}
+.bg-info{
+  background-color: $info !important;
+}
+.bg-warn{
+  background-color: $warn !important;
+}
+.bg-danger{
+  background-color: $danger !important;
+}
+/*---------------------------------
+images
+---------------------------------*/
+.img-profile{
+  @include profile(68px);
+}
+.img-responsive{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  & + &{
+    margin-top: $gap-15;
+  }
+  >img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+.img-circle {
+  border-radius: 50%
+}
+.img-xs{
+  width: torem(48px);
+  height: torem(48px);
+}
+.img-sm{
+  width: torem(68px);
+  height: torem(68px);
+}
+.img-md{
+  width: torem(88px);
+  height: torem(88px);
+}
+.img-lg{
+  width: torem(148px)!important;
+  height: torem(148px)!important;
+}
+/*---------------------------------
+display
+---------------------------------*/
+.block{
+  display: block;
+}
+.inline-block{
+  display: inline-block;
+}
+.flew{
+  display: flex;
+}
+.inline-flew{
+  display: inline-flex;
+}
+/*---------------------------------
+line-height
+---------------------------------*/
+.lh-n{
+  line-height: 0 !important;
+}
+.lh-default{
+  line-height: 1 !important;
+}
+.lh-xs{
+  line-height: 1.2 !important;
+}
+.lh-sm{
+  line-height: 1.4 !important;
+}
+.lh-md{
+  line-height: 1.6 !important;
+}
+.lh-lg{
+  line-height: 1.8 !important;
+}
+.lh-xl{
+  line-height: 2 !important;
+}
+/*---------------------------------
+text
+---------------------------------*/
+//text align
+.text-center{
+  text-align: center;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+.text-justify{
+  text-align: justify;
+  &:after{
+    display: block;
+    content: '';
+  }
+}
+//text size[10...40]
+@for $i from 0 through 20 {
+  $text-size: 10 + ($i * 2);
+
+  .text-#{$text-size} {
+    font-size: $text-size + px !important;
+  }
+}
+//text color
+.text-primary{
+  color: $primary !important;
+}
+.text-secondary{
+  color: $secondary !important;
+}
+.text-default{
+  color: $colorText !important;
+}
+.text-gray{
+  color: $gray !important;
+}
+.text-white{
+  color: $white !important;
+}
+.text-light{
+  color: $grayLight !important;
+}
+.text-lighter{
+  color: $grayLighter !important;
+}
+.text-lightest{
+  color: $grayLightest !important;
+}
+.text-success{
+  color: $success !important;
+}
+.text-info{
+  color: $info !important;
+}
+.text-warn{
+  color: $warn !important;
+}
+.text-danger{
+  color: $danger !important;
+}
+.text-link{
+  color: $link !important;
+}
+//text weight
+.text-bold{
+  font-weight: 500 !important;
+}
+.text-bolder{
+  font-weight: 700 !important;
+}
+.text-normal{
+  font-weight: initial !important;
+}
+//text ellipsis
+.text-1row {
+  @include ellipsis(1);
+}
+.text-2row {
+  @include ellipsis(2);
+}
+//text select
+.text-select{
+  -webkit-user-select:text;
+  user-select:text;
+}
+//text indent
+//text wrap
+.word-break{
+  word-wrap: break-word;
+  word-break:break-all;
+}
+
+.word-normal{
+  word-wrap: normal;
+}
+.hyphens{
+  word-wrap:break-word;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+}
+/*---------------------------------
+vertical
+---------------------------------*/
+.vtc-t{
+  vertical-align: top;
+}
+.vtc-m{
+  vertical-align: middle;
+}
+.vtc-b{
+  vertical-align: bottom;
+}
+.self-s{
+  align-self: flex-start;
+}
+.self-c{
+  align-self: center;
+}
+.self-e{
+  align-self: flex-end;
+}
+/*---------------------------------
+layout
+---------------------------------*/
+//上下固定
+%fixBase{
+  position: -webkit-sticky !important;
+  position: fixed !important;
+  left: 0 !important;
+  z-index: $lv2 !important;
+}
+.fix-t{
+  @extend %fixBase;
+  top: 0 !important;
+}
+.fix-b{
+  @extend %fixBase;
+  bottom: 0 !important;
+}
+//上下浮动
+%floatBase{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: $lv2;
+}
+.float-t{
+  @extend %fixBase;
+  top: 0;
+}
+.float-b{
+  @extend %fixBase;
+  bottom: 0;
+}
+//显示&隐藏元素
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.visible {
+  visibility: visible !important;
+}
+.hidden {
+  visibility: hidden !important;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0
+}
+//浮动
+.pull-left{
+  float: left !important;
+}
+.pull-right{
+  float: right !important;
+}
+.clearfix,.cl{
+  zoom:1;
+  &:after{
+    content:"";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
+}

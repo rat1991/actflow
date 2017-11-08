@@ -1,0 +1,17 @@
+$device: (
+  "iphone4":  320px,
+  "samsung":  360px,
+  "iphone6":  375px,
+  "meuzu":    384px,
+  "android":  400px,
+  "iphone6p": 414px,
+  "ipad":     480px
+);
+
+@each $name, $ratio in $device {
+  @media only screen and (min-width: #{$ratio}){
+      html {
+         font-size: $ratio / 10 !important;
+      }
+  }
+}

@@ -1,0 +1,26 @@
+// 生成三角形图标
+// @name arrow triangle
+// --------------------------------
+@mixin triangle($direction:left, $color:$border-color, $size: 20px) {
+  content: '';
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-width: torem($size) torem($size);
+  @if $direction == top{
+    border-top: 0;
+    border-bottom-color: $color;
+  } @else if $direction == bottom {
+    border-bottom: 0;
+    border-top-color: $color;
+  } @else if $direction == left {
+    border-left: 0;
+    border-right-color: $color;
+  } @else if $direction == right {
+    border-right: 0;
+    border-left-color: $color;
+  }
+}

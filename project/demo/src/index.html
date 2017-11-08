@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>双十一全场加息活动</title>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no, email=no">
+  <script src="//res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.2/vconsole.min.js"></script>
+  <link rel="stylesheet" href="../css/combined.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page act-bg">
+            <span class="act-rule" id="showModalBtn">活动规则</span>
+            <span class="act-share" id="shareBtn"></span>
+            <div class="act-ribbon act-ribbon_part1"></div>
+            <div class="act-ribbon act-ribbon_part2"></div>
+            <h1 class="act-logo"></h1>
+            <h2 class="act-title">
+              <small class="act-title__sub"></small>
+            </h2>
+            <!-- 激活act-btn按钮添加 active 样式 -->
+            <ul class="act-wrapper">
+                <li class="act-wrapper__item">
+                    <div class="act-prize sprite-coupon"></div>
+                    <a class="act-btn active" href="javascript:void(0)" id="raiseBtn">加息专场</a>
+                    <p class="act-time">活动时间: 11月6日-12日</p>
+                </li>
+                <li class="act-wrapper__item">
+                    <div class="act-prize sprite-prize"></div>
+                    <a class="act-btn" href="//www.baidu.com">免费领奖</a>
+                    <p class="act-time">活动时间: 11月10日-14日</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 活动规则 model -->
+    <div class="act-rule-modal">
+        <div class="wrapper">
+            <span class="btn-close" id="hideModalBtn"></span>
+            <div class="content">
+                <dl class="content-item">
+                    <dt><span>加息专场活动规则：</span></dt>
+                    <dd class="content-list">
+                        <i class="dot">1</i>
+                        <p>11月6日～11月12日，用户成功加入（且匹配成功）We计划、复投宝（新手标除外）的金额均可享受0.8%加息奖励！</p>
+                    </dd>
+                </dl>
+                <dl class="content-item">
+                    <dt><span>免费领奖活动规则：</span></dt>
+                    <dd class="content-list">
+                        <span class="dot">1</span>
+                        <p>用户发起助力，须在24小时内邀请满指定数量新用户完成助力，助力成功则可免费领取奖品；主动终止或超过24小时邀请人数不足均视为参与失败，每位用户最多可以同时发起1次助力，失败后可重新发起助力，助力人数重新计算；每位用户最多能领取3个奖品；</p>
+                    </dd>
+                    <dd class="content-list">
+                        <i class="dot">2</i>
+                        <p>助力的好友必须是未在团贷网注册的用户，每位新用户只能助力一次，助力后可获得现金红包和518投资红包，参与的助力发起活动成功/失败，都视作已参与助力；</p>
+                    </dd>
+                    <dd class="content-list">
+                        <i class="dot">3</i>
+                        <p>奖品有德尔玛加湿器、美的榨汁机、iPod Shuffle、111元投资红包等，用户成功助力后库存即减掉，奖品送完即止；</p>
+                    </dd>
+                    <dd class="content-list">
+                        <i class="dot">4</i>
+                        <p>获得奖品将于活动结束后15个工作日内发放，请注意到团宝箱-精美礼品中查收，过期未填写地址，视为放弃，且不支持退换货、兑现、发票等；现金红包、投资红包使用规则以团宝箱说明为准；</p>
+                    </dd>
+                    <dd class="content-list">
+                        <i class="dot">5</i>
+                        <p>在法律许可的合法范畴内，本活动最终解释权归团贷网所有。</p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- END 活动规则 model -->
+    <!-- 分享弹出层 -->
+    <div class="act-share-model">
+        <div class="tip"></div>
+    </div>
+    <!-- END 分享弹出层 -->
+</body>
+<script src="//cdn.staticfile.org/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/build.js"></script>
+<script src="../js/app-share.js"></script>
+<script type="text/javascript">
+  /*
+  TDApp 分享,需引入 jsbridge.js 文件
+  @param {Object} opts:分享参数
+  */
+  function pxToRem (pxVlaue){
+    var _tmp = (pxVlaue / 75).toFixed(2);
+    return _tmp + 'rem'
+  }
+  $('#shareBtn').on('click', function(){
+    window.appShare.set({
+      iconUrl:'', // 分享 icon
+      title:'', // 分享标题
+      content:'', // 分享文案
+      shareUrl:'', // 分享链接
+      // 微信分享遮罩图片
+      wxShareImg:{
+        url:'../images/share-model.png', // 遮罩图片 url
+        style:{                         //遮罩图片样式
+          width: pxToRem(540),                //必须指定 width
+          left: pxToRem(10)
+        }
+      },
+      custom:[],                        //自定义分享
+      //分享回调
+      //callback(result){}
+    })
+  });
+</script>
+</html>

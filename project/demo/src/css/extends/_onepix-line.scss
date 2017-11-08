@@ -1,0 +1,25 @@
+//在移动设备上生成 1px 宽的边框
+%border{
+  @include borderOnePix(all);
+}
+%borderTop{
+  @include borderOnePix(top);
+}
+%borderRight{
+  @include borderOnePix(right);
+}
+%borderBottom{
+  @include borderOnePix(bottom);
+}
+%borderLeft{
+  @include borderOnePix(left);
+}
+%borderHorizontal{
+  @include borderOnePix(horizontal);
+}
+%borderVertical{
+  @include borderOnePix(vertical);
+}
+%borderArrow{
+  @include borderOnePix(arrow);
+}

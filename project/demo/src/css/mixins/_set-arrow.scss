@@ -1,0 +1,26 @@
+// 生成箭头图标
+// @name arrow linear
+// --------------------------------
+@mixin arrowShape($direction, $color, $width:torem(4px)){
+  border-style: solid;
+  border-color: $color; 
+  @if $direction == top {
+    border-width: $width 0 0 $width;
+  }
+  @else if $direction == bottom {
+    border-width: 0 $width $width 0;
+  }
+  @else if $direction == left {
+    border-width: 0 0 $width $width;
+  }
+  @else if $direction == right {
+    border-width: $width $width 0 0;
+  }
+}
+@mixin setArrow($direction:right, $size:14px, $color:$grayLighter) {
+  display: inline-block;
+  width: torem($size);
+  height: torem($size);
+  transform: rotate(45deg);
+  @include arrowShape($direction, $color);
+}

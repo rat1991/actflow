@@ -1,0 +1,101 @@
+@function torem($px){
+    @return $px / 75px * 1rem;
+};
+/*---------------------------------
+Page base
+---------------------------------*/
+//Image path
+$path:                "..";
+$pathImg:                $path + "/images";
+$pathSprite:                $path + "/sprite";
+
+/*---------------------------------
+Colors
+---------------------------------*/
+//black & white
+$black:               #000 !default;
+$white:               #fff !default;
+//gray
+$grayDark:            #333 !default;
+$gray:                #666 !default;
+$grayLight:           #999 !default;
+$grayLighter:         #bbb !default;
+$grayLightest:        #ddd !default;
+//palette
+$success:             #1AAD19 !default;
+$info:                #10aeff !default;
+$warn:                #ffbe00 !default;
+$danger:              #E64340 !default;
+$link:                #586C94 !default;
+//theme
+$primary:             #1AAD19 !default;
+$secondary:           #db9529 !default;
+
+/*---------------------------------
+Spacing
+---------------------------------*/
+$gap-5:               torem(5px) !default;
+$gap-10:              torem(10px) !default;
+$gap-15:              torem(15px) !default;
+$gap-20:              torem(20px) !default;
+$gap-25:              torem(25px) !default;
+$gap-30:              torem(30px) !default;
+$gap-35:              torem(35px) !default;
+$gap-40:              torem(40px) !default;
+$gapSides:            torem(22px) !default;
+$gapLayer:            torem(24px) !default;
+$gapFixTop:           49px !default;
+$gapFixBottom:        45px !default;
+
+/*---------------------------------
+font-size
+-----------------------------------*/
+$text-10:             10px !default;
+$text-12:             12px !default;
+$text-14:             14px !default;
+$text-16:             16px !default;
+$text-18:             18px !default;
+$text-20:             20px !default;
+$text-22:             22px !default;
+$text-24:             24px !default;
+$text-26:             26px !default;
+$text-28:             28px !default;
+$text-30:             30px !default;
+$text-32:             32px !default;
+$text-34:             34px !default;
+$text-36:             36px !default;
+
+/*---------------------------------
+Hierarchy
+---------------------------------*/
+$lv1:                 1 !default;
+$lv2:                 99 !default;
+$lv3:                 999 !default;
+$lv4:                 1000 !default;
+
+/*---------------------------------
+screen
+---------------------------------*/
+$screen-xs:            320px !default;
+$screen-sm:            375px !default;
+$screen-md:            768px !default;
+$screen-lg:            480px !default;
+$screen-max:           768px !default;
+/*---------------------------------
+default style
+---------------------------------*/
+//page
+$bgBody:              #f8f8f8 !default;
+$bgNav:               #191c20 !default;
+$bgEmbed:             #EFEFF4 !default;
+$bgActive:            rgba($black,.08) !default;
+//text
+$colorText:           $grayDark !default;
+$colorTips:           #B2B2B2 !default;
+//shadow
+$shadow:              rgba($black,.1) !default;
+//border
+$colorBorder:         rgba($black,.14) !default;
+
+
+

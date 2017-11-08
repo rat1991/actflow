@@ -1,0 +1,442 @@
+/* ----------------------------------
+reset.css
+------------------------------------*/
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+
+/*@-ms-viewport {
+  width: device-width;
+}*/
+
+html {
+    font-size: 32px;
+    min-height: 100%;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+
+body,
+html {
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    background-color: $bgBody;
+}
+
+body {
+    color: $colorText;
+    font-size: $text-14;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    background-image: none;
+    overflow: visible;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling : touch; 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-font-smoothing: subpixel-antialiased;
+    user-select: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+audio {
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: baseline;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+template,
+[hidden] {
+    display: none;
+}
+
+video {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button {
+    overflow: visible;
+}
+
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+}
+
+fieldset~fieldset {
+    margin-top: $text-24;
+}
+
+input {
+    line-height: normal;
+    outline: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    line-height: normal;
+    margin: 4px 0 0;
+    padding: 0;
+}
+
+input[type="color"] {
+    min-width: $text-20;
+    width: auto;
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
+    line-height: $text-20;
+    line-height: 1 \0;
+}
+
+input[type="file"] {
+    display: block;
+    height: auto;
+    line-height: 1;
+    min-height: $text-36;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+input[type="range"] {
+    display: block;
+    height: $text-36;
+    width: 100%;
+}
+
+input[type="search"] {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+label {
+    display: inline-block;
+    font-weight: 400;
+    margin: 0;
+    max-width: 100%;
+}
+
+legend {
+    border: 0;
+    display: block;
+    font-size: $text-24;
+    font-weight: 400;
+    line-height: $text-32;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+optgroup {
+    font-weight: 500;
+}
+
+select[multiple],
+select[size] {
+    height: auto;
+}
+
+textarea {
+    overflow: auto;
+}
+
+a {
+    color: $link;
+    text-decoration: none;
+    outline: none;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+}
+
+a:active,
+a:focus,
+a:hover {
+    outline: none;
+}
+
+a:focus,
+a:hover {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    border-color: transparent
+}
+
+abbr {
+    border-bottom: 1px dotted $colorBorder;
+    cursor: help;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+address {
+    font-size: $text-14;
+    font-style: normal;
+    font-weight: 400;
+    line-height: $text-20;
+    margin: $text-12 0;
+}
+
+b,
+strong {
+    font-weight: 500;
+}
+
+dfn {
+    font-style: italic;
+}
+
+blockquote,
+q {
+    font-size: $text-20;
+    font-style: italic;
+    font-weight: 300;
+    line-height: $text-28;
+    margin: $text-24 0;
+    padding-right: $text-32;
+    padding-left: $text-32;
+    position: relative;
+}
+
+dd,
+dt,
+li {
+    line-height: $text-20;
+}
+
+dd {
+    margin: 0;
+}
+
+dl {
+    margin: $text-12 0;
+}
+
+dt {
+    font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: inherit;
+    font-weight: 500;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
+h1,
+.h1 {
+    font-size: $text-22;
+}
+
+h2,
+.h2 {
+    font-size: $text-20;
+}
+
+h3,
+.h3 {
+    font-size: $text-18;
+}
+
+h4,
+.h4 {
+    font-size: $text-16;
+}
+
+h5,
+.h5 {
+    font-size: $text-14;
+}
+
+h6,
+.h6 {
+    font-size: $text-12;
+}
+
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small {
+    font-size: 75%;
+}
+
+hr,
+.hr {
+    border: 0;
+    border-top: 1px solid $colorBorder;
+    box-sizing: content-box;
+    display: block;
+    height: 0;
+    margin-top: $text-24;
+    margin-bottom: $text-24;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p {
+    margin: 0;
+}
+
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+small {
+    font-size: 75%;
+    line-height: 1;
+}
+
+sub,
+sup {
+    font-size: 80%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+th {
+    text-align: left;
+}

@@ -1,0 +1,70 @@
+// 适配多倍屏的 CSS 选择器
+// @support css-media-resolution
+@mixin screenResolution($num) {
+  @media (-webkit-min-device-pixel-ratio: $num),
+    (min-device-pixel-ratio: $num),
+    (min-resolution: #{$num}dppx),
+    (min-resolution: #{$num*96}dpi) {
+      @content; 
+  }
+}
+// 图片
+// @name profile
+// --------------------------------
+
+@mixin profile($size, $radius:0){
+  width: torem($size);
+  height: torem($size);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: $radius;
+  >img{
+    display: block;
+    width: 100%;
+    height: auto;
+    &[src=""]{
+      display: none;
+    }
+  }
+}
+// 图片
+// @name imgResponsive
+// --------------------------------
+@mixin imgResponsive($w, $h, $radius:0, $overflow:hidden) {
+  width: torem($w);
+  height: torem($h);
+  border-radius: $radius;
+  overflow: $overflow;
+  >img{
+    display: block;
+    @if $w >= $h {
+      width: 100%;
+      height: auto;
+    }
+    @else if $direction == top {
+      width: auto;
+      height: 100%;
+    }
+    &[src=""]{
+      display: none;
+    }
+  }
+}
+// 文字省略
+// @name text ellipsis
+// --------------------------------
+@mixin ellipsis($line: 1) {
+  @if $line==1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+  @else {
+      display: -webkit-box;
+      -webkit-line-clamp: $line;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+}

@@ -1,0 +1,20 @@
+/* ----------------------------------
+主题.css
+------------------------------------*/
+$skin: ("default":#4898d3, "red":#f58d74);
+  
+@each $name, $color in $skin {
+  
+  .skin-#{$name}{
+    background-color: $color;
+    
+    .page-current{
+      background-color: $color;
+    }
+    .wx-shop-about-hd{
+      color: $white;
+      background-color: $color;
+    }
+  }
+  
+}

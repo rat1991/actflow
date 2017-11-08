@@ -1,0 +1,18 @@
+.sprite-coupon {
+  display: block;
+  width: torem(284px);
+  height: torem(261px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(579px)  torem(261px);
+  background-repeat:no-repeat;
+  background-position: torem(-295px) torem(0px);
+}
+.sprite-prize {
+  display: block;
+  width: torem(291px);
+  height: torem(261px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(579px)  torem(261px);
+  background-repeat:no-repeat;
+  background-position: torem(0px) torem(0px);
+}
