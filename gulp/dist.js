@@ -1,6 +1,7 @@
 "use strict";
 import path from 'path'
 import del from 'del'
+import fs from 'fs'
 import async from 'async'
 import gulp from 'gulp'
 import gulpif from 'gulp-if'
@@ -11,6 +12,7 @@ import ejs from 'gulp-ejs'
 import babel from 'gulp-babel'
 import minifyCSS from 'gulp-cssnano'
 import uglify from 'gulp-uglify'
+import concat from 'gulp-concat'
 import rev from 'gulp-rev'
 import revCollector from 'gulp-rev-collector'
 import imagemin from 'gulp-imagemin'
@@ -23,7 +25,7 @@ function dist (options, callback) {
   // 项目目录配置
   const config = Object.assign({}, options);
   const projectPath = `${config.base}/${config.name}`;
-  const bs = require('browser-sync').create();  // 自动刷新浏览器
+  
   let paths = {
     src: {
       dir: path.join(projectPath, 'src'),
@@ -33,7 +35,8 @@ function dist (options, callback) {
       sassDir: path.join(projectPath, 'src/css'),
       js: path.join(projectPath, 'src/js/**/*.js'),
       images: path.join(projectPath, 'src/images/**/*.{JPG,jpg,png,gif,svg}'),
-      slice: path.join(projectPath, 'src/slice/**/*.png'),
+      slice: path.join(projectPath, 'src/slice/*.png'),
+      sliceDir: path.join(projectPath, 'src/slice'),
       media: path.join(projectPath, 'src/media/**/*')
     },
     tmp: {
@@ -56,14 +59,52 @@ function dist (options, callback) {
       images: path.join(projectPath, 'dist/images'),
       sprite: path.join(projectPath, 'dist/sprite'),
     }
-  }
-  
+  };
+
   // 清空文件
   function delFile (type, next) {
       del(paths[type].dir, {force: true}).then(()=>{
         console.log(`deleted ${type} success.`);
           next && next();
       })
+  }
+  // 编译雪碧图(多文件)
+  function compileSpriteMulti (cb) {
+    let cssMerged = merge();
+    let imgMerged = merge();
+    let files = fs.readdirSync(paths.src.sliceDir);
+    let folderList = files.filter( item =>{
+      return !/\.png$/.test(item)
+    });
+    let rootSlice = files.filter( item =>{
+      return /\.png$/.test(item)
+    });
+    if(rootSlice.length > 0){
+      folderList.unshift(null)
+    }
+    if(!folderList.length) return;
+    folderList.forEach(folder=>{
+      let slicePath = folder === null ? '' : `/${folder}`;
+      let spriteData = gulp.src(paths.src.sliceDir + `${slicePath}/*.png`).pipe(spritesmith({
+          imgName: `${folder||'sprite'}.png`,
+          cssName: `${folder||'sprite'}.scss`,
+          cssFormat: 'scss',
+          cssTemplate: 'templates/sprite.handlebars',
+          algorithm:'top-down',
+          padding: 8
+      }));
+      let imgStream = spriteData.img.pipe(gulp.dest(paths.tmp.sprite))
+      let cssStream = spriteData.css
+      cssMerged.add(cssStream)
+      imgMerged.add(imgStream, cssStream)
+    })
+    cssMerged.pipe(concat('sprite.scss'))
+             .pipe(gulp.dest(paths.src.sassDir));
+
+    return merge(imgMerged, cssMerged).on('end', ()=> {
+        console.log('compileSpriteMulti success.');
+        cb && cb();
+    })
   }
   // 编译雪碧图
   function compileSprite (cb) {
@@ -72,11 +113,11 @@ function dist (options, callback) {
           cssName: 'sprite.scss',
           cssFormat: 'scss',
           cssTemplate: 'templates/sprite.handlebars',
-          padding: 4
+          padding: 8
     }));
     let imgStream = spriteData.img.pipe(gulp.dest(paths.tmp.sprite))
     let cssStream = spriteData.css.pipe(gulp.dest(paths.src.sassDir))
-    
+
     return merge(imgStream, cssStream).on('end', ()=> {
         console.log('compileSprite success.');
         cb && cb();
@@ -210,7 +251,7 @@ function dist (options, callback) {
           .on('end', function () {
               console.log('merge asset success.');
               cb && cb();
-          }); 
+          });
   }
   //图片压缩
   function imageminImg(cb) {
@@ -244,7 +285,8 @@ function dist (options, callback) {
     function(cb){
       delFile('dist', cb)
     },
-    compileSprite,
+    //compileSprite,
+    compileSpriteMulti,
     gulp.parallel(
       gulp.series(compileSass, miniCSS),
       compileJs,

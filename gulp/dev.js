@@ -1,10 +1,12 @@
 "use strict";
 import path from 'path'
 import del from 'del'
+import fs from 'fs'
 import async from 'async'
 import gulp from 'gulp'
 import sass from 'gulp-sass'
 import autoprefixer from 'gulp-autoprefixer'
+import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import gulpif from 'gulp-if'
 import spritesmith from 'gulp.spritesmith'
@@ -27,7 +29,8 @@ function dev (config, callback) {
       sassDir: path.join(projectPath, 'src/css'),
       js: path.join(projectPath, 'src/js/**/*.js'),
       images: path.join(projectPath, 'src/images/**/*.{JPG,jpg,png,gif,svg}'),
-      slice: path.join(projectPath, 'src/slice/**/*.png'),
+      slice: path.join(projectPath, 'src/slice/*.png'),
+      sliceDir: path.join(projectPath, 'src/slice'),
       media: path.join(projectPath, 'src/media/**/*')
     },
     dev: {
@@ -63,9 +66,6 @@ function dev (config, callback) {
           next && next();
       })
   }
-  function condition(file) {
-      return path.extname(file.path) === '.png';
-  }
   //编译 sass
   function compileSass(cb) {
       gulp.src(paths.src.sass)
@@ -89,6 +89,44 @@ function dev (config, callback) {
                   reloadHandler();
               }
           })
+  }
+  // 编译雪碧图(多文件)
+  function compileSpriteMulti (cb) {
+    let cssMerged = merge();
+    let imgMerged = merge();
+    let files = fs.readdirSync(paths.src.sliceDir);
+    let folderList = files.filter( item =>{
+      return !/\.png$/.test(item)
+    });
+    let rootSlice = files.filter( item =>{
+      return /\.png$/.test(item)
+    });
+    if(rootSlice.length > 0){
+      folderList.unshift(null)
+    }
+    if(!folderList.length) return;
+    folderList.forEach(folder=>{
+      let slicePath = folder === null ? '' : `/${folder}`;
+      let spriteData = gulp.src(paths.src.sliceDir + `${slicePath}/*.png`).pipe(spritesmith({
+          imgName: `${folder||'sprite'}.png`,
+          cssName: `${folder||'sprite'}.scss`,
+          cssFormat: 'scss',
+          cssTemplate: 'templates/sprite.handlebars',
+          algorithm:'top-down',
+          padding: 8
+      }));
+      let imgStream = spriteData.img.pipe(gulp.dest(paths.dev.sprite))
+      let cssStream = spriteData.css
+      cssMerged.add(cssStream)
+      imgMerged.add(imgStream, cssStream)
+    })
+    cssMerged.pipe(concat('sprite.scss'))
+             .pipe(gulp.dest(paths.src.sassDir));
+    
+    return merge(imgMerged, cssMerged).on('end', ()=> {
+        console.log('compileSpriteMulti success.');
+        cb && cb();
+    })
   }
   // 编译雪碧图
   function compileSprite (cb) {
@@ -267,7 +305,7 @@ function dev (config, callback) {
     function(cb){
       delFile('dev', cb)
     },
-    compileSprite,
+    compileSpriteMulti,
     gulp.parallel(compileSass, compileHtml, compileJs, startServer),
     //复制不需要编译的文件
     gulp.parallel(
