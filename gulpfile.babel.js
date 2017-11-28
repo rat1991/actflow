@@ -18,7 +18,7 @@ import dist from './gulp/dist'
       注意:因修改添加版本号为“?=hash*10”形式，请在 npm install 完成后将update文件下的模块覆盖到node_modules
     ============================================================================================*/
     assetRev: false
-  }
+  };
 
   // 执行开发，并启动http服务器
   gulp.task('dev', dev(config));

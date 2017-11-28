@@ -14,9 +14,11 @@ import ejs from 'gulp-ejs'
 import babel from 'gulp-babel'
 import merge from 'merge-stream'
 import buffer from 'vinyl-buffer'
+import util from './util'
 
-function dev (config, callback) {
+function dev (param, callback) {
   // 项目目录配置
+  let config = Object.assign({}, param);
   const projectPath = `${config.base}/${config.name}`;
   const bs = require('browser-sync').create();  // 自动刷新浏览器
   let paths = {
@@ -31,6 +33,7 @@ function dev (config, callback) {
       images: path.join(projectPath, 'src/images/**/*.{JPG,jpg,png,gif,svg}'),
       slice: path.join(projectPath, 'src/slice/*.png'),
       sliceDir: path.join(projectPath, 'src/slice'),
+      sliceAll: path.join(projectPath, 'src/slice/**/*.png'),
       media: path.join(projectPath, 'src/media/**/*')
     },
     dev: {
@@ -104,15 +107,21 @@ function dev (config, callback) {
     if(rootSlice.length > 0){
       folderList.unshift(null)
     }
-    if(!folderList.length) return;
+    if(!folderList.length){
+      cb && cb();
+      return
+    };
     folderList.forEach(folder=>{
       let slicePath = folder === null ? '' : `/${folder}`;
       let spriteData = gulp.src(paths.src.sliceDir + `${slicePath}/*.png`).pipe(spritesmith({
           imgName: `${folder||'sprite'}.png`,
           cssName: `${folder||'sprite'}.scss`,
           cssFormat: 'scss',
+          cssVarMap(sprite) {
+            sprite.name = `sprite${folder ? '-' + folder : ''}-${sprite.name}`;
+          },
           cssTemplate: 'templates/sprite.handlebars',
-          algorithm:'top-down',
+          algorithm:'binary-tree',
           padding: 8
       }));
       let imgStream = spriteData.img.pipe(gulp.dest(paths.dev.sprite))
@@ -180,7 +189,7 @@ function dev (config, callback) {
             paths.src.sassAll,
             paths.src.js,
             paths.src.images,
-            paths.src.slice,
+            paths.src.sliceAll,
             paths.src.media,
         ],
         {ignored: /[\/\\]\./}
@@ -223,7 +232,7 @@ function dev (config, callback) {
                     var tmp = file.replace(/src/, 'dev');
                     del([tmp], {force: true});
                 } else {
-                    gulp.series(compileSprite, compileSass)()
+                    gulp.series(compileSpriteMulti, compileSass)()
                 }
                 break;
 
@@ -250,7 +259,7 @@ function dev (config, callback) {
                     var tmp = file.replace(/src/, 'dev').replace('.scss', '.css');
                     del([tmp], {force: true});
                 } else {
-                    compileSass()
+                    util.debounce(compileSass, 500)()
                 }
 
                 break;

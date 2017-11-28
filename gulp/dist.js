@@ -60,7 +60,21 @@ function dist (options, callback) {
       sprite: path.join(projectPath, 'dist/sprite'),
     }
   };
+  
+  // 复制操作
+  function copyHandler(type, file, cb) {
+      if (typeof file === 'function') {
+          cb = file;
+          file = paths['src'][type];
+      }
 
+      gulp.src(file, {base: paths.src.dir})
+          .pipe(gulp.dest(paths.dist.dir))
+          .on('end', ()=> {
+              console.log(`copy ${type} success.`);
+              cb ? cb() : reloadHandler();
+          });
+  }
   // 清空文件
   function delFile (type, next) {
       del(paths[type].dir, {force: true}).then(()=>{
@@ -90,7 +104,7 @@ function dist (options, callback) {
           cssName: `${folder||'sprite'}.scss`,
           cssFormat: 'scss',
           cssTemplate: 'templates/sprite.handlebars',
-          algorithm:'top-down',
+          algorithm:'binary-tree',
           padding: 8
       }));
       let imgStream = spriteData.img.pipe(gulp.dest(paths.tmp.sprite))
@@ -292,7 +306,10 @@ function dist (options, callback) {
       compileJs,
       compileHtml,
       imageminImg,
-      imageminSprite
+      imageminSprite,
+      function(cb){
+        copyHandler('media', cb);
+      }
     ),
     mergeRes,
     revCollectorCss,

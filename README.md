@@ -8,18 +8,18 @@
   const config = {
     // 项目存放目录(不要修改)
     base: 'project',
-    
+
     // 当前开发活动名称(修改项目名进行开发)
     name: '需开发的项目名称',
-    
+
     // 文件修改后是否自动刷新
     livereload: true,
-    
+
     // build任务时是否添加版本号(css文件内引用的图片也会添加版本号)
     //注意:因修改添加版本号为“?=hash*10”形式，请在 npm install 完成后将update文件下的模块覆盖到node_modules
     assetRev: false
   }
-```  
+```
 `gulp dev` 执行开发
 
 `gulp build` 执行构建
@@ -41,7 +41,7 @@
   <!-- build:css ../css/style-base.css -->
     <link href="../css/style-base.css" rel="stylesheet">
   <!-- endbuild -->
-  
+
 // 包含多个文件，则会进行合并
   <!-- build:js ../js/app-share.js -->
     <script src="../js/appshare/appShare.bundle.js"></script>
@@ -58,7 +58,7 @@ sass所有入口文件统一以“`style-*`”开头，gulp也只会编译“`st
 ##### 三、雪碧图使用
 将雪碧图的切片统一放入`project/src/slice`文件夹，使用时则引用样式`sprite-*` “*”为切片的文件名
 关于生产多张雪碧图：
-在`project/src/slice`文件夹下通过文件夹来分类切片文件，每个文件夹生产一张雪碧图；所有切片文件名不能重复
+在`project/src/slice`文件夹下通过文件夹来分类切片文件，每个文件夹生产一张雪碧图；引用的样式名为: `sprite-文件夹名-*`
 
 ##### 四、关于自定义项目模版
-创建项目时会自动生成一个项目模版，可修改`templates/project.zip`文件定制自己的项目模版；也可修改`create.js`在创建项目时根据参数来创建不同项目的模版
+创建项目时会自动生成一个项目模版，可修改`templates/project.zip`文件定制自己的项目模版；
