@@ -18,7 +18,11 @@ import dist from './gulp/dist'
       注意:因修改添加版本号为“?=hash*10”形式，请在 npm install 完成后将update文件下的模块覆盖到node_modules
     ============================================================================================*/
     assetRev: true,
-    // 雪碧图class前缀
+    /**
+     * 雪碧图选项
+     * @key prefix: css前缀
+     * @key algorithm: sprite合并方式 https://www.npmjs.com/package/gulp.spritesmith#algorithms
+     */
     sprite: {
       prefix: 'sp',
       algorithm:'binary-tree',
