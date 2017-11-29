@@ -1,4 +1,13 @@
 {
-  "presets": ["es2015"],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 4 versions", "ie >= 8"]
+        }
+      }
+    ]
+  ],
   "comments": false
 }
