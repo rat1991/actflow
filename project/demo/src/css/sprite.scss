@@ -1,18 +1,64 @@
-.sprite-coupon {
+.sp-icon-moment {
   display: block;
-  width: torem(284px);
-  height: torem(261px);
-  background-image: url(#{$pathSprite}/sprite.png);
-  background-size: torem(579px)  torem(261px);
-  background-repeat:no-repeat;
-  background-position: torem(-295px) torem(0px);
-}
-.sprite-prize {
-  display: block;
-  width: torem(291px);
-  height: torem(261px);
-  background-image: url(#{$pathSprite}/sprite.png);
-  background-size: torem(579px)  torem(261px);
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/icon.png);
+  background-size: torem(108px)  torem(108px);
   background-repeat:no-repeat;
   background-position: torem(0px) torem(0px);
+}
+.sp-icon-qrcode {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/icon.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(-58px) torem(0px);
+}
+.sp-icon-shake {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/icon.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(0px) torem(-58px);
+}
+
+.sp-bottle {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(0px) torem(0px);
+}
+.sp-game {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(-58px) torem(0px);
+}
+.sp-jd {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(0px) torem(-58px);
+}
+.sp-locaitonservice {
+  display: block;
+  width: torem(50px);
+  height: torem(50px);
+  background-image: url(#{$pathSprite}/sprite.png);
+  background-size: torem(108px)  torem(108px);
+  background-repeat:no-repeat;
+  background-position: torem(-58px) torem(-58px);
 }

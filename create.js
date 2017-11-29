@@ -12,9 +12,10 @@ let argv = yargs
 function createProject (config, callback){
   let basePath = './project';
   let projectName = argv.name;
-  let projectTplName = argv.tpl;
+  // 根据-t参数创建模版
+  let tplName = argv.tpl || 'project';
   const PROJECT_PATH = path.join(__dirname, `${basePath}/${projectName}`);
-  const TEMPLATE_PROJECT = path.join(__dirname, 'templates/project.zip');
+  const TEMPLATE_PROJECT = path.join(__dirname, `templates/${tplName}.zip`);
   // 判断项目是否存在
   fs.exists(PROJECT_PATH, function (exists) {
       if(exists){

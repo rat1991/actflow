@@ -118,10 +118,10 @@ function dev (param, callback) {
           cssName: `${folder||'sprite'}.scss`,
           cssFormat: 'scss',
           cssVarMap(sprite) {
-            sprite.name = `sprite${folder ? '-' + folder : ''}-${sprite.name}`;
+            sprite.name = `${config.sprite.prefix}${folder ? '-' + folder : ''}-${sprite.name}`;
           },
           cssTemplate: 'templates/sprite.handlebars',
-          algorithm:'binary-tree',
+          algorithm: config.sprite.algorithm,
           padding: 8
       }));
       let imgStream = spriteData.img.pipe(gulp.dest(paths.dev.sprite))

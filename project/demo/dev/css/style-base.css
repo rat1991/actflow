@@ -2937,23 +2937,77 @@ th {
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp; }
 
-.sprite-coupon {
+.sp-icon-moment {
   display: block;
-  width: 3.78667rem;
-  height: 3.48rem;
-  background-image: url(../sprite/sprite.png);
-  background-size: 7.72rem 3.48rem;
-  background-repeat: no-repeat;
-  background-position: -3.93333rem 0rem; }
-
-.sprite-prize {
-  display: block;
-  width: 3.88rem;
-  height: 3.48rem;
-  background-image: url(../sprite/sprite.png);
-  background-size: 7.72rem 3.48rem;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/icon.png);
+  background-size: 1.44rem 1.44rem;
   background-repeat: no-repeat;
   background-position: 0rem 0rem; }
+
+.sp-icon-qrcode {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/icon.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: -0.77333rem 0rem; }
+
+.sp-icon-shake {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/icon.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: 0rem -0.77333rem; }
+
+.sp-bottle {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/sprite.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: 0rem 0rem; }
+
+.sp-game {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/sprite.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: -0.77333rem 0rem; }
+
+.sp-jd {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/sprite.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: 0rem -0.77333rem; }
+
+.sp-locaitonservice {
+  display: block;
+  width: 0.66667rem;
+  height: 0.66667rem;
+  background-image: url(../sprite/sprite.png);
+  background-size: 1.44rem 1.44rem;
+  background-repeat: no-repeat;
+  background-position: -0.77333rem -0.77333rem; }
+
+.demo-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
 
 /*==============================
 reuse.css重用
