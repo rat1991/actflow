@@ -44,7 +44,6 @@ function dev (param, callback) {
       sprite: path.join(projectPath, 'dev/sprite'),
     }
   }
-  
   // 自动刷新
   function reloadHandler() {
       config.livereload && bs.reload();
@@ -95,6 +94,12 @@ function dev (param, callback) {
   }
   // 编译雪碧图(多文件)
   function compileSpriteMulti (cb) {
+    try {
+      fs.accessSync(paths.src.sliceDir);
+    } catch (e) {
+      cb && cb()
+      return;
+    }
     let cssMerged = merge();
     let imgMerged = merge();
     let files = fs.readdirSync(paths.src.sliceDir);
@@ -131,7 +136,7 @@ function dev (param, callback) {
     })
     cssMerged.pipe(concat('sprite.scss'))
              .pipe(gulp.dest(paths.src.sassDir));
-    
+
     return merge(imgMerged, cssMerged).on('end', ()=> {
         console.log('compileSpriteMulti success.');
         cb && cb();
@@ -148,7 +153,7 @@ function dev (param, callback) {
     }));
     let imgStream = spriteData.img.pipe(gulp.dest(paths.dev.sprite))
     let cssStream = spriteData.css.pipe(gulp.dest(paths.src.sassDir))
-    
+
     return merge(imgStream, cssStream).on('end', ()=> {
         console.log('compileSprite success.');
         cb && cb();
@@ -158,12 +163,28 @@ function dev (param, callback) {
   function compileJs(cb) {
       return gulp.src(paths.src.js)
           .pipe(babel({
-              presets: ["babel-preset-es2015", "babel-preset-stage-2"].map(require.resolve)
+            presets: [
+              [
+                "env",
+                {
+                  "targets": {
+                    "browsers": ["last 5 versions", "ie >= 8"]
+                  }
+                }
+              ],
+              "babel-preset-stage-2"
+            ],
+//            plugins: ['transform-runtime']
+//            modules: "common", // 默认是 common，也可以改成 umd
           }))
           .pipe(gulp.dest(paths.dev.js))
           .on('end', ()=> {
-              console.log('compileJs success.');
-              cb && cb();
+              if (cb) {
+                  console.log('compileJs success.');
+                  cb();
+              } else {
+                  reloadHandler();
+              }
           });
   }
   //编译 html
@@ -241,7 +262,7 @@ function dev (param, callback) {
                     var tmp = file.replace(/src/, 'dev');
                     del([tmp], {force: true});
                 } else {
-                    copyHandler('js', file);
+                    util.throttle(compileJs, 500)()
                 }
                 break;
 
@@ -259,7 +280,7 @@ function dev (param, callback) {
                     var tmp = file.replace(/src/, 'dev').replace('.scss', '.css');
                     del([tmp], {force: true});
                 } else {
-                    util.debounce(compileSass, 500)()
+                    util.throttle(compileSass, 1000)()
                 }
 
                 break;
@@ -308,7 +329,7 @@ function dev (param, callback) {
 
       cb();
   }
-  
+
   // 执行任务
   return gulp.series(
     function(cb){

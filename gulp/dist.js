@@ -84,6 +84,12 @@ function dist (options, callback) {
   }
   // 编译雪碧图(多文件)
   function compileSpriteMulti (cb) {
+    try {
+      fs.accessSync(paths.src.sliceDir);
+    } catch (e) {
+      cb && cb()
+      return;
+    }
     let cssMerged = merge();
     let imgMerged = merge();
     let files = fs.readdirSync(paths.src.sliceDir);
@@ -145,6 +151,7 @@ function dist (options, callback) {
       let spritePath = `${paths.tmp.sprite}/**/*.png`
       gulp.src(spritePath)
           .pipe(imagemin({
+              progressive: true,
               use: [pngquant()]
           }))
           .pipe(rev())
@@ -199,7 +206,17 @@ function dist (options, callback) {
 
       return gulp.src(paths.src.js)
           .pipe(babel({
-              presets: ["babel-preset-es2015", "babel-preset-stage-2"].map(require.resolve)
+            presets: [
+              [
+                "env",
+                {
+                  "targets": {
+                    "browsers": ["last 4 versions", "ie >= 8"]
+                  }
+                }
+              ],
+              "babel-preset-stage-2"
+            ]
           }))
           .pipe(uglify())
           .pipe(gulp.dest(paths.tmp.js))
@@ -274,6 +291,8 @@ function dist (options, callback) {
   function imageminImg(cb) {
       gulp.src(paths.src.images)
           .pipe(imagemin({
+              optimizationLevel: 5,
+              progressive: true,
               use: [pngquant()]
           }))
           .pipe(rev())
