@@ -24,7 +24,7 @@ import merge from 'merge-stream'
 function dist (options, callback) {
   // 项目目录配置
   const config = Object.assign({}, options);
-  const projectPath = `${config.base}/${config.name}`;
+  const projectPath = path.resolve(`${config.base}/${config.name}`);
   
   let paths = {
     src: {

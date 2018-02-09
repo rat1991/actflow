@@ -19,7 +19,7 @@ import util from './util'
 function dev (param, callback) {
   // 项目目录配置
   let config = Object.assign({}, param);
-  const projectPath = `${config.base}/${config.name}`;
+  const projectPath = path.resolve(`${config.base}/${config.name}`);
   const bs = require('browser-sync').create();  // 自动刷新浏览器
   let paths = {
     src: {
